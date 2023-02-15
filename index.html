@@ -23,10 +23,10 @@
     </header>
     <section class="meme-editor">
         <div class="canvas-container">
-            <div class="display-txt-top"></div>
+            <div class="display-txt top"></div>
             <canvas class="canvas" id="my-canvas" width="550" height="550" >
             </canvas>
-            <div class="display-txt-battom"></div>
+            <div class="display-txt battom"></div>
         </div>
         <div class="control-box">
             <div>
@@ -44,14 +44,20 @@
             <button class="btn-control-box decrease-font" onclick="onChangeFontSize(-2)"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
             <button class="btn-control-box increase-font" onclick="onChangeFontSize(2)"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
             
-            <button class="btn-control-box  align-left" onclick="onAlignText('l')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
-            <button class="btn-control-box  align-center" onclick="onAlignText('c')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
-            <button class="btn-control-box  align-rigth" onclick="onAlignText('r')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
+            <button class="btn-control-box  align-left" onclick="onAlignText('left')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
+            <button class="btn-control-box  align-center" onclick="onAlignText('center')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
+            <button class="btn-control-box  align-rigth" onclick="onAlignText('right')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
             
             </div>
             <div>
-            <input type="font" class="control-box switch-font" onchange="onChangeFont()">
+                <label for="font-fam"">font :</label>
+                <select onchange="onChangeFont(this.value)" class="font-fam" name="font-fam" >
+                    <option>impact</option>
+                    <option>cursive</option>
+                    <option>Times New Roman</option>
+                </select>
             </div>
+            <!-- todo -->
             <div class="control-box emojy-select"><span>⇤</span><span class="emoji-display"></span><span>⇥</span></div>
         </div>
     </section>

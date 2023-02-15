@@ -9,33 +9,37 @@ let gCurrMeme
 console.log('gImgs', gImgs);
 console.log('gMeme', gMeme);
 
-function  setAlignText(alignType){
-   if(alignType==='l') gCurrMeme.lines[0].align='left'
-   if(alignType==='c') gCurrMeme.lines[0].align='center'
-   if(alignType==='r') gCurrMeme.lines[0].align='rigth'
-   
+function setAlignText(alignType,slectedLine) {
+     gCurrMeme.lines[slectedLine].align = alignType
 }
 
-function  changeFontSize(diff){
-  let fontSize=  gCurrMeme.lines[0].size
-  fontSize+=diff
-  gCurrMeme.lines[0].size=fontSize
-  
-  return fontSize
-  
-}
-function setNewColor(color){
-    gCurrMeme.lines[0].color=color
+function updateSelectedLine(num) {
+    gCurrMeme.selectedLineIdx = num
 }
 
-function  setCurrMeme(meme){
-    gCurrMeme=meme
+function getSelectedLine() {
+    return gCurrMeme.selectedLineIdx
+}
+function changeFontSize(diff,slectedLine) {
+    let fontSize = gCurrMeme.lines[slectedLine].size
+    fontSize += diff
+    gCurrMeme.lines[slectedLine].size = fontSize
+
+    return fontSize
+
+}
+function setNewColor(color, slectedLine) {
+    gCurrMeme.lines[slectedLine].color = color
+}
+
+function setCurrMeme(meme) {
+    gCurrMeme = meme
 }
 
 function setLineTxt(txt) {
-    gCurrMeme.lines[0].txt=txt
-    console.log('gCurrMeme',gCurrMeme);
-    
+    gCurrMeme.lines[0].txt = txt
+    console.log('gCurrMeme', gCurrMeme);
+
 }
 
 function getImgs() {
@@ -64,6 +68,12 @@ function createMeme(id, idx) {
         selectedLineIdx: idx,
         lines: [
             {
+                txt: '',
+                size: 20,
+                align: 'left',
+                color: 'red'
+
+            }, {
                 txt: '',
                 size: 20,
                 align: 'left',
