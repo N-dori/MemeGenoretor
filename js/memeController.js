@@ -12,14 +12,37 @@ function onInit(){
     renderImgsToGallery()
     renderMeme(0)
 }
+function onAlignText(alignType){
+    let elText=document.querySelector(`.display-txt-top`)
+    setAlignText(alignType)
+    console.log('alignType',alignType);
+    
+    if(alignType==='l') elText.style.textAlign='left'
+    if(alignType==='c') elText.style.textAlign='center'
+    if(alignType==='r') elText.style.textAlign='right'
+}
 
+function onChangeFontSize(diff){
+    let fontSize=changeFontSize(diff)
+    let elTxtDisplay=document.querySelector('.display-txt-top')
+   elTxtDisplay.style.fontSize=fontSize+'px'
+   
+}
+
+
+function onchangecolor(type,color){
+   let elText=document.querySelector(`.display-txt-top`)
+    if(type==='fill')elText.style.color=color +''   
+    if(type==='stroke')elText.style.webkitTextStroke= `1px`;
+    setNewColor(color)
+}
 function onSetLineTxt(txt){
     //recive text from this.value
     setLineTxt(txt)
 }
 
 function renderText(value){
-    let elTxtDisplay=document.querySelector('.display-txt')
+    let elTxtDisplay=document.querySelector('.display-txt-top')
     elTxtDisplay.innerHTML=value
 }
 
@@ -47,7 +70,8 @@ function renderImgsToGallery(){
     let count2=1
     // <img src="/img/1.jpg"></img>
     let elImgsContainer=document.querySelector('.meme-gallery .imgs-container')
-    let strHtmls=imgs.map(img=>`<div class="gallery-image-container" onclick="onImgSelect(${count2++})" ><img  class="gallery-image" src="/img/${count++}.jpg"></img></div>\n`)
+    let strHtmls=imgs.map(img=>`<div class="gallery-image-container" onclick="onImgSelect(${count2++})">
+    <img  class="gallery-image" src="/img/${count++}.jpg"></img></div>\n`)
     
     elImgsContainer.innerHTML=strHtmls.join('')
 }   

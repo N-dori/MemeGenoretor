@@ -23,28 +23,31 @@
     </header>
     <section class="meme-editor">
         <div class="canvas-container">
-            <div class="display-txt"></div>
+            <div class="display-txt-top"></div>
             <canvas class="canvas" id="my-canvas" width="550" height="550" >
             </canvas>
+            <div class="display-txt-battom"></div>
         </div>
         <div class="control-box">
             <div>
+             <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)" value="#ff0000">
             <input class="control-box text-input" type="text" placeholder=" your a text..." oninput="renderText(this.value), onSetLineTxt(this.value)">
+            <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)" value="#ff0000">
             </div>
             <div>
-            <button class="btn-control-box switch-line" onclick="onSwitchTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <!-- todo -->
+                <button class="btn-control-box switch-line" onclick="onSwitchTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                  <!-- todo -->
             <button class="btn-control-box add-text-line" onclick="onAddTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/add.png"></button>
             <button class="btn-control-box remove-meme" onclick="onRemoveTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/trash.png"></button>
             
-            <button class="btn-control-box decrease-font" onclick="onDecreaseFont()"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
-            <button class="btn-control-box increase-font" onclick="onIncreaseFont()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
+            <button class="btn-control-box decrease-font" onclick="onChangeFontSize(-2)"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
+            <button class="btn-control-box increase-font" onclick="onChangeFontSize(2)"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
             
             <button class="btn-control-box  align-left" onclick="onAlignText('l')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
             <button class="btn-control-box  align-center" onclick="onAlignText('c')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
             <button class="btn-control-box  align-rigth" onclick="onAlignText('r')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
-
-            <button type="color" class="btn-control-box color" onchange="onchangecolor('fill')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"></button>
-            <button type="color" class="btn-control-box text-stroke" onchange="onchangecolor('stroke')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"></button>
+            
             </div>
             <div>
             <input type="font" class="control-box switch-font" onchange="onChangeFont()">

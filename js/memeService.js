@@ -9,6 +9,24 @@ let gCurrMeme
 console.log('gImgs', gImgs);
 console.log('gMeme', gMeme);
 
+function  setAlignText(alignType){
+   if(alignType==='l') gCurrMeme.lines[0].align='left'
+   if(alignType==='c') gCurrMeme.lines[0].align='center'
+   if(alignType==='r') gCurrMeme.lines[0].align='rigth'
+   
+}
+
+function  changeFontSize(diff){
+  let fontSize=  gCurrMeme.lines[0].size
+  fontSize+=diff
+  gCurrMeme.lines[0].size=fontSize
+  
+  return fontSize
+  
+}
+function setNewColor(color){
+    gCurrMeme.lines[0].color=color
+}
 
 function  setCurrMeme(meme){
     gCurrMeme=meme
