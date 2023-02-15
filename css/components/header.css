@@ -1,0 +1,14 @@
+.main-header{
+    height: 66px;
+    background-color: var(--clr1);
+    margin-bottom: 22px;
+    color: #ffff;
+}
+.main-menu>*{
+margin-inline-end: 2.9375em;
+}
+li a{
+    font-size: 1.1875em;
+    cursor: pointer;
+    font-family: Montserrat;
+}

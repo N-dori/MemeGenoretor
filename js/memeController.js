@@ -3,6 +3,7 @@ console.log('hi');
 
 let gCanvas
 let gCtx
+let gisGalleryOpen=true
 
 let isFirstLoad = true
 
@@ -11,6 +12,20 @@ function onInit() {
     gCtx = gCanvas.getContext('2d')
     renderImgsToGallery()
     renderMeme(0)
+}
+function toggleGallery(){
+    let elEditor=document.querySelector('.meme-editor')
+    let elGallery=document.querySelector('.meme-gallery')
+    if(gisGalleryOpen){
+          elEditor.classList.add('display-none')
+    elGallery.style.display='block'
+    gisGalleryOpen=false
+    }else{
+        elEditor.classList.remove('display-none')
+        elGallery.style.display='none'
+        gisGalleryOpen=true
+    }
+  
 }
 function onSwitchTextLine() {
     let selectedLine = getSelectedLine()
@@ -112,6 +127,8 @@ function renderMeme(idx) {
 
 function onImgSelect(idx) {
     renderMeme(idx - 1)
+    toggleGallery()
+
 }
 
 function renderImgsToGallery() {

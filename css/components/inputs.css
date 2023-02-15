@@ -1,3 +1,9 @@
 .font-fam{
     font-size: 16px;
 }
+.control-box.text-input{
+    height: 60px;
+    width: 23.3125em;
+    border-radius: 0.75em;
+    background-color: #ffff;
+}

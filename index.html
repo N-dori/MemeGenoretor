@@ -14,8 +14,7 @@
         <nav class="nav-bar">
             <div ><img class="logo" src="/logo/LOGO.png"></div>
             <ul class="main-menu">
-                <li><a>Editor</a></li>
-                <li><a>Gallery</a></li>
+                <li onclick="toggleGallery()"><a>Gallery</a></li>
                 <li><a>About</a></li>
             </ul>
         </nav>
@@ -50,7 +49,7 @@
             
             </div>
             <div>
-                <label for="font-fam"">font :</label>
+                <label for="font-fam">font :</label>
                 <select onchange="onChangeFont(this.value)" class="font-fam" name="font-fam" >
                     <option>impact</option>
                     <option>cursive</option>
@@ -61,12 +60,13 @@
             <div class="control-box emojy-select"><span>⇤</span><span class="emoji-display"></span><span>⇥</span></div>
         </div>
     </section>
-    <footer class="main-footer">meme-momo</footer>
     <section class="meme-gallery">
-        <div class="meme-gallery imgs-container">
-            
-        </div>
+        <div class="meme-gallery imgs-container"></div>
     </section>
+    <footer class="main-footer">
+        <div ><img class="logo-fooetr" src="/logo/LOGO.png"></div>
+        <small>coffe-rigths reserve 2023</small>
+    </footer>
     <script src="/js/memeService.js"></script>
     <script src="/js/memeController.js"></script>
 </body>

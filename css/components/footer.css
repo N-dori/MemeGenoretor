@@ -1,0 +1,13 @@
+.main-footer{
+    height: 207px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr1);
+
+}
+small{
+    font-size: 1.1875em;
+    color: #ffff;
+}
