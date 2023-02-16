@@ -114,7 +114,6 @@ function onSetLineTxt(txt) {
 
 function renderMeme() {
     let lines= getLines()
-    let memeLine= getMemeLine()
     const img = new Image()
     const src= getUrl()
     img.src = src
@@ -127,9 +126,6 @@ function renderMeme() {
         
        }
     }
-   
-    
-
 }
 
 function onImgSelect(idx) {
@@ -156,13 +152,16 @@ function drawText(memeLine) {
     
     gCtx.fillText(memeLine.txt, memeLine.x,memeLine.y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(memeLine.txt,memeLine.x, memeLine.y) // Draws (strokes) a given text at the given (x, y) position.
-    gCtx.save()
+  
 }
 
 function drawRect(memeLine) {
     // paint on the canvas, without using a path
+   let txtWidth= gCtx.measureText(memeLine.txt).width
+   console.log('txtWidth',txtWidth);
+   
     gCtx.strokeStyle = 'orange'
-    gCtx.strokeRect(25, memeLine.y-25, 450, 70)
+    gCtx.strokeRect(memeLine.x, memeLine.y-25, txtWidth, 70)
    // gCtx.fillStyle = color
    // gCtx.fillRect(x, y, size, size)
   }
@@ -178,8 +177,10 @@ function renderImgsToGallery() {
     elImgsContainer.innerHTML = strHtmls.join('')
 }
 
-function drawImgFromlocal() {
- 
+function onDownload(elLink){
+
+        downloadCanvas(elLink)
+    
 }
 //meme
 

@@ -148,4 +148,5 @@ function downloadCanvas(elLink) {
     // to pull information from remote web sites without permission.
     elLink.href = data
     elLink.download = 'my-img.jpg'
+
 }
