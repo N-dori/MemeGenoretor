@@ -41,7 +41,7 @@
 }
 
 .meme-gallery {
-    display: none;
+    /* display: none; */
     grid-column: 2;
     max-width: 1050px;
  

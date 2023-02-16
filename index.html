@@ -20,45 +20,53 @@
         </nav>
      
     </header>
-    <section class="meme-editor">
+    <section class="meme-editor" >
         <div class="canvas-container">
             <div class="display-txt top"></div>
             <canvas class="canvas" id="my-canvas" width="550" height="550" >
             </canvas>
             <div class="display-txt battom"></div>
         </div>
+        
         <div class="control-box">
-            <div>
-             <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)" value="#ff0000">
-            <input class="control-box text-input" type="text" placeholder=" your a text..." oninput="renderText(this.value), onSetLineTxt(this.value)">
-            <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)" value="#ff0000">
-            </div>
-            <div>
-                <!-- todo -->
+            <div class="first-set-of-tools">
+                <input class="control-box text-input" type="text" placeholder=" your a text..." oninput="onDrawText(this.value)">
+              
+                <button class="btn-control-box add-text-line" onclick="onAddTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/add.png"></button>
                 <button class="btn-control-box switch-line" onclick="onSwitchTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-                  <!-- todo -->
-            <button class="btn-control-box add-text-line" onclick="onAddTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/add.png"></button>
-            <button class="btn-control-box remove-meme" onclick="onRemoveTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/trash.png"></button>
-            
-            <button class="btn-control-box decrease-font" onclick="onChangeFontSize(-2)"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
-            <button class="btn-control-box increase-font" onclick="onChangeFontSize(2)"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
-            
-            <button class="btn-control-box  align-left" onclick="onAlignText('left')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
-            <button class="btn-control-box  align-center" onclick="onAlignText('center')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
-            <button class="btn-control-box  align-rigth" onclick="onAlignText('right')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
-            
+                <button class="btn-control-box remove-meme" onclick="onRemoveTextLine()"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/trash.png"></button>
             </div>
-            <div>
-                <label for="font-fam">font :</label>
+            <div  class="second-set-of-tools">
+                <button class="btn-control-box decrease-font" onclick="onChangeFontSize(-2)"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
+                <button class="btn-control-box increase-font" onclick="onChangeFontSize(2)"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
+              
+                <button class="btn-control-box  align-left" onclick="onAlignText('left')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
+                <button class="btn-control-box  align-center" onclick="onAlignText('center')"><img  class="btn-img" src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
+                <button class="btn-control-box  align-rigth" onclick="onAlignText('right')"><img class="btn-img"  src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
+                
+                <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)" value="#ff0000">
+                <input type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)" value="#ff0000">
+                
                 <select onchange="onChangeFont(this.value)" class="font-fam" name="font-fam" >
                     <option>impact</option>
                     <option>cursive</option>
                     <option>Times New Roman</option>
                 </select>
             </div>
+
             <!-- todo -->
-            <div class="control-box emojy-select"><span>⇤</span><span class="emoji-display"></span><span>⇥</span></div>
-        </div>
+                <div  class="third-set-of-tools" >
+                    <div class="control-box emojy-select"><span>⇤</span><span class="emoji-display"></span><span>⇥</span></div>
+                </div>
+                <div>
+                  <!-- todo -->
+                  <select class="download-share">
+                    <option >Download</option>
+                    <option>Share</option>
+                  </select>
+             </div>
+            
+
     </section>
     <section class="meme-gallery">
         <div class="meme-gallery imgs-container"></div>

@@ -1,74 +1,89 @@
 'use strict'
 console.log('hi');
 
-let gCanvas
+let gElcanvas
 let gCtx
 let gisGalleryOpen=true
-
 let isFirstLoad = true
 
 function onInit() {
-    gCanvas = document.querySelector('#my-canvas')
-    gCtx = gCanvas.getContext('2d')
+    gElcanvas = document.querySelector('#my-canvas')
+    gCtx = gElcanvas.getContext('2d')
+
+    document.querySelector('.meme-editor').classList.add('display-none')
     renderImgsToGallery()
-    renderMeme(0)
+   // resizeCanvas()
+  //  renderMeme()
 }
+
 function toggleGallery(){
     let elEditor=document.querySelector('.meme-editor')
     let elGallery=document.querySelector('.meme-gallery')
     if(gisGalleryOpen){
-          elEditor.classList.add('display-none')
-    elGallery.style.display='block'
+          elEditor.classList.remove('display-none')
+    elGallery.classList.add('display-none')
     gisGalleryOpen=false
     }else{
-        elEditor.classList.remove('display-none')
-        elGallery.style.display='none'
+        elEditor.classList.add('display-none')
+        elGallery.classList.remove('display-none')
         gisGalleryOpen=true
     }
   
 }
+
+function onAddTextLine(){
+    addTextLine()
+}
+
 function onSwitchTextLine() {
     let selectedLine = getSelectedLine()
     if (selectedLine === 0) updateSelectedLine(1)
     if (selectedLine === 1) updateSelectedLine(0)
+
+console.log('selectedLine',gMeme);
 
 }
 
 function onChangeFont(font) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-        let elTxtDisplay = document.querySelector('.display-txt.top')
-        elTxtDisplay.style.fontFamily = font
+       updateFontFamily(font,slectedLine)
+       renderMeme()
     } else {
-        let elTxtDisplay = document.querySelector('.display-txt.battom')
-        elTxtDisplay.style.fontFamily = font
+        updateFontFamily(font,slectedLine)
+        renderMeme()
+      
     }
 
+}
+
+function onRemoveTextLine(){
+    let slectedLine = getSelectedLine()
+    removeTextLine(slectedLine)
+    renderMeme()
 }
 
 function onAlignText(alignType) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-        let elTxtDisplay = document.querySelector('.display-txt.top')
-        elTxtDisplay.style.textAlign = alignType
+        setAlignment(alignType,slectedLine)
+        renderMeme()
     } else {
-        let elTxtDisplay = document.querySelector('.display-txt.battom')
-        elTxtDisplay.style.textAlign = alignType
+        setAlignment(alignType,slectedLine)
+        renderMeme()
     }
-    setAlignText(alignType, slectedLine)
-    console.log('alignType', alignType);
+    
 }
 
 function onChangeFontSize(diff) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-        let fontSize = changeFontSize(diff, slectedLine)
-        let elTxtDisplay = document.querySelector('.display-txt.top')
-        elTxtDisplay.style.fontSize = fontSize + 'px'
+         changeFontSize(diff, slectedLine)
+         renderMeme()
+     
     } else {
-        let fontSize = changeFontSize(diff, slectedLine)
-        let elTxtDisplay = document.querySelector('.display-txt.battom')
-        elTxtDisplay.style.fontSize = fontSize + 'px'
+        changeFontSize(diff, slectedLine)
+         renderMeme()
     }
 
 
@@ -95,58 +110,82 @@ function onSetLineTxt(txt) {
     setLineTxt(txt)
 }
 
-function renderText(value) {
-    let elTxtDisplayTop = document.querySelector('.display-txt.top')
-    let elTxtDisplayBattom = document.querySelector('.display-txt.battom')
-    let slectedLine = getSelectedLine()
-    if (slectedLine === 0) {
-        elTxtDisplayTop.innerHTML = value
-        elTxtDisplayTop.style.border = `1px solid orange`
-        elTxtDisplayBattom.style.border = `none`
-    } else {
-        elTxtDisplayBattom.innerHTML = value
-        elTxtDisplayBattom.style.border = `1px solid orange`
-        elTxtDisplayTop.style.border = `none`
+
+
+function renderMeme() {
+    let lines= getLines()
+    let memeLine= getMemeLine()
+    const img = new Image()
+    const src= getUrl()
+    img.src = src
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gElcanvas.width, gElcanvas.height) //img,x,y,xEnd,yEnd
+       for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+        drawText(line)
+       if(line.txt) drawRect(line)
+        
+       }
     }
-
-}
-
-function renderMeme(idx) {
-
-
-    const meme = getMeme(idx)
-    setCurrMeme(meme)
-
-    console.log('meme', meme);
-
-    const url = getUrl(idx)
-
-    drawImgFromlocal(url)
+   
+    
 
 }
 
 function onImgSelect(idx) {
-    renderMeme(idx - 1)
+    setMemeSelectedImgId(idx)
     toggleGallery()
-
+    renderMeme()
+    
+    
 }
+function onDrawText(text){
+    updateText(text)
+    renderMeme()
+    
+}
+function drawText(memeLine) {
+    console.log('memeLine',memeLine);
+    
+    gCtx.lineWidth = 1
+    gCtx.strokeStyle = memeLine.font
+    gCtx.fillStyle = memeLine.color
+    gCtx.font = `${memeLine.size}px ${memeLine.font}`
+    gCtx.textAlign = memeLine.align
+    gCtx.textBaseline = 'middle'
+    
+    gCtx.fillText(memeLine.txt, memeLine.x,memeLine.y) // Draws (fills) a given text at the given (x, y) position.
+    gCtx.strokeText(memeLine.txt,memeLine.x, memeLine.y) // Draws (strokes) a given text at the given (x, y) position.
+    gCtx.save()
+}
+
+function drawRect(memeLine) {
+    // paint on the canvas, without using a path
+    gCtx.strokeStyle = 'orange'
+    gCtx.strokeRect(25, memeLine.y-25, 450, 70)
+   // gCtx.fillStyle = color
+   // gCtx.fillRect(x, y, size, size)
+  }
 
 function renderImgsToGallery() {
     const imgs = getImgs()
-    let count = 1
-    let count2 = 1
+    
     // <img src="/img/1.jpg"></img>
     let elImgsContainer = document.querySelector('.meme-gallery .imgs-container')
-    let strHtmls = imgs.map(img => `<div class="gallery-image-container" onclick="onImgSelect(${count2++})">
-    <img  class="gallery-image" src="/img/${count++}.jpg"></img></div>\n`)
-
+    let strHtmls = imgs.map(img => `<div class="gallery-image-container" onclick="onImgSelect(${img.id})">
+    <img  class="gallery-image" src="/img/${img.id}.jpg"></img></div>\n`)
+    
     elImgsContainer.innerHTML = strHtmls.join('')
 }
 
-function drawImgFromlocal(url) {
-    const img = new Image()
-    img.src = url
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xEnd,yEnd
-    }
+function drawImgFromlocal() {
+ 
 }
+//meme
+
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElcanvas.width = elContainer.offsetWidth
+    gElcanvas.height = elContainer.offsetHeight
+  }
