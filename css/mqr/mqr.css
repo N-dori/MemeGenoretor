@@ -93,6 +93,66 @@
 
     }
 
+    .main-header .nav-bar {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 1;
+        background-color: #ffa500e8;
+        border-inline-start: 1px solid gray;
+        box-shadow: 1px 2px 2px 8px #d3d3d391;
+        translate: 100%;
+        transition: translate, .6s;
+
+    }
+
+    .menu-open {
+        translate: 0%;
+    }
+
+
+    .main-menu {
+        flex-direction: column;
+
+        align-items: center;
+        position: relative;
+        top: 120px;
+    }
+
+    .btn-menu {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 24px;
+        width: 50px;
+        height: 50px;
+        font-size: 42px;
+        text-align: center;
+        background-color: transparent;
+        border: none;
+    }
+
+    .main-menu>* {
+        margin-bottom: 25px;
+        border-bottom: 2px solid gray;
+        font-size: 1.3em;
+        text-align: center;
+        width: 100%;
+    }
+
+    .logo-container {
+        position: absolute;
+        top: 30px;
+
+    }
+
+    .logo {
+        margin-inline-start: 0px;
+    }
+
     .meme-gallery {
         margin-inline-start: 0px;
     }

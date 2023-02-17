@@ -4,6 +4,7 @@ let gElcanvas
 let gCtx
 let gisGalleryOpen = true
 let isFirstLoad = true
+let isMenuOpen=true
 
 function onInit() {
     gElcanvas = document.querySelector('#my-canvas')
@@ -15,7 +16,20 @@ function onInit() {
     // resizeCanvas()
     //  renderMeme()
 }
-
+function toggleMenu(){
+    let elscreen=document.querySelector('.main-screen')
+    let elNavBar=document.querySelector('.nav-bar')
+    if(isMenuOpen){
+     elscreen.style.display='block'
+     elNavBar.style.translate='0%'
+     isMenuOpen=false
+   }
+   else{
+    elNavBar.style.translate='100%'
+    elscreen.style.display='none'
+    isMenuOpen=true
+   } 
+}
 function onChangePage(diff) {
     console.log('diff', diff);
 
@@ -30,7 +44,12 @@ function renderEmojis() {
 
 }
 
-function toggleGallery() {
+function toggleGallery(first) {
+    if(first){
+        if(isFirstLoad)return
+    else isFirstLoad=false
+}
+isFirstLoad=false
     let elEditor = document.querySelector('.meme-editor')
     let elGallery = document.querySelector('.meme-gallery')
     if (gisGalleryOpen) {
@@ -125,8 +144,6 @@ function onSetLineTxt(txt) {
 
 
 function renderMeme() {
-    let selectedLine=getSelectedLine()
-
     let lines = getLines()
     const img = new Image()
     const src = getUrl()

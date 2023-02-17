@@ -10,15 +10,16 @@
 </head>
 
 <body onload="onInit()" class="main-layout">
+    <div onclick="toggleMenu('open')" class="main-screen"></div>
     <header class="main-header">
         <nav class="nav-bar">
-            <div><img class="logo" src="/logo/LOGO.png"></div>
+            <div class="logo-container"><img class="logo" src="/logo/LOGO.png"></div>
             <ul class="main-menu">
-                <li onclick="toggleGallery()"><a>Gallery</a></li>
+                <li onclick="toggleGallery(1)"><a>Gallery</a></li>
                 <li><a>About</a></li>
             </ul>
         </nav>
-
+        <button class="btn-menu" onclick="toggleMenu()" type="button">☰</button>
     </header>
     <section class="meme-editor">
         <div class="canvas-container">
