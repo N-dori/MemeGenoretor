@@ -25,6 +25,7 @@
     background-color: var(--clr1);
     border-radius: 12px;
         margin-inline-start: auto;
+        margin-bottom: 15px;
 }
 .btn-download-link{
     color:#ffff;

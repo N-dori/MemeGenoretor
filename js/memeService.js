@@ -17,8 +17,9 @@ let gMeme = {
             align: 'center',
             color: 'white',
             stroke: 'black',
+            rectColor:'orange',
             x: 200,
-            y: 100,
+            y: 50,
             
 
         },
@@ -69,8 +70,9 @@ function addTextLine() {
         align: 'center',
         color: 'white',
         stroke: 'black',
+        rectColor:'orange',
         x: 200,
-        y: 450,
+        y: 380,
       
     }
     gMeme.lines.push(newLine)
@@ -92,19 +94,27 @@ function setAlignment(alignType, slectedLine) {
 
     if (alignType === 'left') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = 50
+        gMeme.lines[slectedLine].x = 10
     } else if (alignType === 'center') {
         gMeme.lines[slectedLine].align = alignType
         gMeme.lines[slectedLine].x = 250
     } else if (alignType === 'right') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = 500
+        gMeme.lines[slectedLine].x = 420
         
     }
 }
 
 function updateSelectedLine(num) {
     gMeme.selectedLineIdx = num
+    if(num===0){
+        gMeme.lines[0].rectColor='orange'
+        gMeme.lines[1].rectColor='rgba(255,255,255,0)'
+    }else if(num===1){
+        gMeme.lines[1].rectColor='orange'
+        gMeme.lines[0].rectColor='rgba(255,255,255,0)'
+    }
+    
 }
 function getLines() {
     return gMeme.lines
@@ -182,12 +192,20 @@ function createImg(id, url) {
     }
     return img
 }
+function clearRects(){
+       let lines= gMeme.lines
+    lines.forEach(el => {
+            el.rectColor='rgba(255,255,255,0)'        
+    });
+}
 function downloadCanvas(elLink) {
-    // Protect the image soo attacker could not download imgs from diff domain
+
+    
     const data = gElcanvas.toDataURL() // For security reason you cannot do toDataUrl on tainted canvas
     // This protects users from having private data exposed by using images
     // to pull information from remote web sites without permission.
     elLink.href = data
     elLink.download = 'my-img.jpg'
+    gMeme.lines[0].rectColor='orange'
 
 }

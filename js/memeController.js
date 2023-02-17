@@ -2,7 +2,7 @@
 
 let gElcanvas
 let gCtx
-let gisGalleryOpen=true
+let gisGalleryOpen = true
 let isFirstLoad = true
 
 function onInit() {
@@ -12,66 +12,63 @@ function onInit() {
     document.querySelector('.meme-editor').classList.add('display-none')
     renderImgsToGallery()
     renderEmojis()
-   // resizeCanvas()
-  //  renderMeme()
+    // resizeCanvas()
+    //  renderMeme()
 }
 
-function onChangePage(diff){
-    console.log('diff',diff);
-    
+function onChangePage(diff) {
+    console.log('diff', diff);
+
     ChangePage(diff)
     renderEmojis()
 }
 
-function  renderEmojis(){
-  const elEmojysContainer=document.querySelector('.emojy-container')
-    const emojys= getEmojys()
-    elEmojysContainer.innerHTML=emojys
-    
+function renderEmojis() {
+    const elEmojysContainer = document.querySelector('.emojy-container')
+    const emojys = getEmojys()
+    elEmojysContainer.innerHTML = emojys
+
 }
 
-function toggleGallery(){
-    let elEditor=document.querySelector('.meme-editor')
-    let elGallery=document.querySelector('.meme-gallery')
-    if(gisGalleryOpen){
-          elEditor.classList.remove('display-none')
-    elGallery.classList.add('display-none')
-    gisGalleryOpen=false
-    }else{
+function toggleGallery() {
+    let elEditor = document.querySelector('.meme-editor')
+    let elGallery = document.querySelector('.meme-gallery')
+    if (gisGalleryOpen) {
+        elEditor.classList.remove('display-none')
+        elGallery.classList.add('display-none')
+        gisGalleryOpen = false
+    } else {
         elEditor.classList.add('display-none')
         elGallery.classList.remove('display-none')
-        gisGalleryOpen=true
+        gisGalleryOpen = true
     }
-  
+
 }
 
-function onAddTextLine(){
+function onAddTextLine() {
     addTextLine()
 }
 
 function onSwitchTextLine() {
     let selectedLine = getSelectedLine()
-    if (selectedLine === 0) updateSelectedLine(1)
+    if (selectedLine === 0){} updateSelectedLine(1)
     if (selectedLine === 1) updateSelectedLine(0)
-
-
-
 }
 
 function onChangeFont(font) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-       updateFontFamily(font,slectedLine)
-       renderMeme()
-    } else {
-        updateFontFamily(font,slectedLine)
+        updateFontFamily(font, slectedLine)
         renderMeme()
-      
+    } else {
+        updateFontFamily(font, slectedLine)
+        renderMeme()
+
     }
 
 }
 
-function onRemoveTextLine(){
+function onRemoveTextLine() {
     let slectedLine = getSelectedLine()
     removeTextLine(slectedLine)
     renderMeme()
@@ -80,24 +77,24 @@ function onRemoveTextLine(){
 function onAlignText(alignType) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-        setAlignment(alignType,slectedLine)
+        setAlignment(alignType, slectedLine)
         renderMeme()
     } else {
-        setAlignment(alignType,slectedLine)
+        setAlignment(alignType, slectedLine)
         renderMeme()
     }
-    
+
 }
 
 function onChangeFontSize(diff) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-         changeFontSize(diff, slectedLine)
-         renderMeme()
-     
+        changeFontSize(diff, slectedLine)
+        renderMeme()
+
     } else {
         changeFontSize(diff, slectedLine)
-         renderMeme()
+        renderMeme()
     }
 
 
@@ -126,19 +123,22 @@ function onSetLineTxt(txt) {
 
 
 
+
 function renderMeme() {
-    let lines= getLines()
+    let selectedLine=getSelectedLine()
+
+    let lines = getLines()
     const img = new Image()
-    const src= getUrl()
+    const src = getUrl()
     img.src = src
+   
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElcanvas.width, gElcanvas.height) //img,x,y,xEnd,yEnd
-       for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
-        drawText(line)
-       if(line.txt) drawRect(line)
-        
-       }
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i];
+            drawText(line)
+            if (line.txt) drawRect(line)
+        }
     }
 }
 
@@ -146,70 +146,78 @@ function onImgSelect(idx) {
     setMemeSelectedImgId(idx)
     toggleGallery()
     renderMeme()
-    
-    
+
+
 }
-function onDrawText(text){
+function onDrawText(text) {
     updateText(text)
     renderMeme()
-    
+
 }
 function drawText(memeLine) {
-    console.log('memeLine',memeLine.align);
-    
+    console.log('memeLine', memeLine.align);
+
     gCtx.lineWidth = 1
-    gCtx.strokeStyle = memeLine.font
+    gCtx.strokeStyle = memeLine.stroke
     gCtx.fillStyle = memeLine.color
     gCtx.font = `${memeLine.size}px ${memeLine.font}`
     gCtx.textAlign = memeLine.align
     gCtx.textBaseline = 'middle'
-    
-    gCtx.fillText(memeLine.txt, memeLine.x,memeLine.y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(memeLine.txt,memeLine.x, memeLine.y) // Draws (strokes) a given text at the given (x, y) position.
-  
+
+    gCtx.fillText(memeLine.txt, memeLine.x, memeLine.y) // Draws (fills) a given text at the given (x, y) position.
+    gCtx.strokeText(memeLine.txt, memeLine.x, memeLine.y) // Draws (strokes) a given text at the given (x, y) position.
+
 }
 
 function drawRect(memeLine) {
-    // paint on the canvas, without using a path
-   let txtWidth= gCtx.measureText(memeLine.txt).width
-   let txthight=gCtx.measureText(memeLine.txt).actualBoundingBoxAscent +gCtx.measureText(memeLine.txt).actualBoundingBoxDescent
-   console.log('txthight',txthight);
-   
-    gCtx.strokeStyle = 'orange'
-   
-    if(memeLine.align==='center'){
-        gCtx.textBaseline='middle'
-         gCtx.strokeRect(memeLine.x-(txtWidth/2), (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
+    // let slectedLine = getSelectedLine()
+
+    // console.log('slectedLine', slectedLine);
+
+
+    let txtWidth = gCtx.measureText(memeLine.txt).width
+    let txthight = gCtx.measureText(memeLine.txt).actualBoundingBoxAscent + gCtx.measureText(memeLine.txt).actualBoundingBoxDescent
+    console.log('txthight', txthight);
+
+    gCtx.strokeStyle = memeLine.rectColor
+
+    if (memeLine.align === 'center') {
+        gCtx.textBaseline = 'middle'
+        gCtx.strokeRect(memeLine.x - (txtWidth / 2), (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
     }
-    if(memeLine.align==='right') {
-        gCtx.textBaseline='middle'
-        gCtx.strokeRect(memeLine.x-txtWidth, (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
-    } 
-    if(memeLine.align==='left'){
-        gCtx.textBaseline='middle'
-      gCtx.strokeRect(memeLine.x, (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
-    } 
-   
+    if (memeLine.align === 'right') {
+        gCtx.textBaseline = 'middle'
+        gCtx.strokeRect(memeLine.x - txtWidth, (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
     }
-   // gCtx.fillStyle = color
-   // gCtx.fillRect(x, y, size, size)
+    if (memeLine.align === 'left') {
+        gCtx.textBaseline = 'middle'
+        gCtx.strokeRect(memeLine.x, (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
+    }
   
+}
+// gCtx.fillStyle = color
+// gCtx.fillRect(x, y, size, size)
+
 
 function renderImgsToGallery() {
     const imgs = getImgs()
-    
+
     // <img src="/img/1.jpg"></img>
     let elImgsContainer = document.querySelector('.meme-gallery .imgs-container')
     let strHtmls = imgs.map(img => `<div class="gallery-image-container" onclick="onImgSelect(${img.id})">
     <img  class="gallery-image" src="/img/${img.id}.jpg"></img></div>\n`)
-    
+
     elImgsContainer.innerHTML = strHtmls.join('')
 }
 
-function onDownload(elLink){
+function onDownload(elLink) {
+    clearRects()
+    renderMeme()
+    setTimeout(() => {
+          downloadCanvas(elLink)
+    }, 1000);
+  
 
-        downloadCanvas(elLink)
-    
 }
 //meme
 
@@ -218,4 +226,4 @@ function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
     gElcanvas.width = elContainer.offsetWidth
     gElcanvas.height = elContainer.offsetHeight
-  }
+}
