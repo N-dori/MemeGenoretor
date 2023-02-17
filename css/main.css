@@ -1,9 +1,11 @@
 @import'/css/components/btns.css';
 @import'/css/components/logo.css';
 @import'/css/components/text-display.css';
-@import'/css/base/base.css';
 @import'/css/components/inputs.css';
 @import'/css/components/header.css';
 @import'/css/layout/layout.css';
 @import'/css/components/footer.css';
+@import'/css/base/base.css';
+@import'/css/components/tool-box.css';
+@import'/css/components/emojys.css';
 @import'/css/setup/setup.css';

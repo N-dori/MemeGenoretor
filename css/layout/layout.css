@@ -1,6 +1,7 @@
 .main-layout {
     display: grid;
-    grid-template-columns: minmax(130px, 1fr) minmax(1000px, 1fr) minmax(130px, 1fr)
+    grid-template-columns: minmax(30px, 1fr) minmax(1100px, 1fr) minmax(135px, 1fr);
+    background-color:var(--clr2);
 }
 
 .main-header {
@@ -22,14 +23,14 @@
 
 .control-box {
     margin-inline-start: 50px;
-    background-color: aliceblue;
+    background-color:var(--clr2);
     display: flex;
     flex-wrap: wrap;
 }
 
 .canvas-container {
-    position: relative;
-    background-color: rgb(235, 130, 18);
+    width: 550px;
+    background-color:var(--clr2);
 
 }
 

@@ -1,5 +1,4 @@
 'use strict'
-console.log('hi');
 
 let gElcanvas
 let gCtx
@@ -12,8 +11,23 @@ function onInit() {
 
     document.querySelector('.meme-editor').classList.add('display-none')
     renderImgsToGallery()
+    renderEmojis()
    // resizeCanvas()
   //  renderMeme()
+}
+
+function onChangePage(diff){
+    console.log('diff',diff);
+    
+    ChangePage(diff)
+    renderEmojis()
+}
+
+function  renderEmojis(){
+  const elEmojysContainer=document.querySelector('.emojy-container')
+    const emojys= getEmojys()
+    elEmojysContainer.innerHTML=emojys
+    
 }
 
 function toggleGallery(){
@@ -40,7 +54,7 @@ function onSwitchTextLine() {
     if (selectedLine === 0) updateSelectedLine(1)
     if (selectedLine === 1) updateSelectedLine(0)
 
-console.log('selectedLine',gMeme);
+
 
 }
 
@@ -141,7 +155,7 @@ function onDrawText(text){
     
 }
 function drawText(memeLine) {
-    console.log('memeLine',memeLine);
+    console.log('memeLine',memeLine.align);
     
     gCtx.lineWidth = 1
     gCtx.strokeStyle = memeLine.font
@@ -158,13 +172,28 @@ function drawText(memeLine) {
 function drawRect(memeLine) {
     // paint on the canvas, without using a path
    let txtWidth= gCtx.measureText(memeLine.txt).width
-   console.log('txtWidth',txtWidth);
+   let txthight=gCtx.measureText(memeLine.txt).actualBoundingBoxAscent +gCtx.measureText(memeLine.txt).actualBoundingBoxDescent
+   console.log('txthight',txthight);
    
     gCtx.strokeStyle = 'orange'
-    gCtx.strokeRect(memeLine.x, memeLine.y-25, txtWidth, 70)
+   
+    if(memeLine.align==='center'){
+        gCtx.textBaseline='middle'
+         gCtx.strokeRect(memeLine.x-(txtWidth/2), (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
+    }
+    if(memeLine.align==='right') {
+        gCtx.textBaseline='middle'
+        gCtx.strokeRect(memeLine.x-txtWidth, (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
+    } 
+    if(memeLine.align==='left'){
+        gCtx.textBaseline='middle'
+      gCtx.strokeRect(memeLine.x, (memeLine.y-(txthight/2))-(txthight/2), txtWidth, txthight*2)
+    } 
+   
+    }
    // gCtx.fillStyle = color
    // gCtx.fillRect(x, y, size, size)
-  }
+  
 
 function renderImgsToGallery() {
     const imgs = getImgs()

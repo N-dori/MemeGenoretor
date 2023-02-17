@@ -1,0 +1,16 @@
+.emojy-container{
+    font-size: 36px;
+}
+.arrow{
+    cursor: pointer;
+}
+.arrow-left{
+    position: absolute;
+    align-self: start;
+}
+.arrow-right{
+    position: absolute;
+    align-self: end;
+    -ms-transform: rotate(180deg); /* IE 9 */
+    transform: rotate(180deg);
+}

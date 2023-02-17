@@ -1,0 +1,52 @@
+.control-box{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 23.3125em;
+}
+.first-set-of-tools{
+ margin-bottom: 53px;
+ padding: 0;
+
+}
+.second-set-of-tools{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+
+}
+
+.third-set-of-tools{
+    display: flex;
+   align-items: center;
+    margin-bottom: 30px;
+}
+.btn-control-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #ffff;
+    margin-inline-start: 13px;
+}
+.font-fam{
+    width: 13.3125em;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #ffff;
+}
+.btn-control-box.color{
+    height: 60px;
+}
+.control-box.emojy-select{
+    position: relative;
+    width: 23.3125em;
+    display: flex;
+ align-items: center;
+ margin-bottom: 20px;
+
+background-color: #ffff;
+
+}

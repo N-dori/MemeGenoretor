@@ -1,6 +1,9 @@
 'use strict'
 
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+let gEmojys=['😆','😜','😍','😟','😸','🕶', '🐨','🐯' ,'🦁','🐮','🐯' ,'🦁','🐮']
+const PAGE_SIZE=3
+let gPageIdx=0
 let gImgs = createImgs()
 
 let gMeme = {
@@ -8,34 +11,67 @@ let gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: '',
-            size: 20,
+            txt: 'your text...',
+            size: 25,
             font: 'impact',
-            align: 'left',
+            align: 'center',
             color: 'white',
             stroke: 'black',
             x: 200,
             y: 100,
+            
 
         },
     ]
 }
 
-console.log('gImgs', gImgs);
-console.log('gMeme', gMeme);
+// console.log('gImgs', gImgs);
+// console.log('gMeme', gMeme);
+function ChangePage(diff){
 
+    gPageIdx+=diff
+    console.log('gPageIdx', gPageIdx)
+    if (gPageIdx * PAGE_SIZE >= gEmojys.length||
+        gPageIdx * PAGE_SIZE < 0){
+            gPageIdx = 0
+        } 
+}
 
+function nextPage() {
+    gPageIdx++
+    
+    if (gPageIdx * PAGE_SIZE >= gBooks.length) {
+        gPageIdx = 0
+    }
+   ;
+}
+
+function prevPage() {
+    gPageIdx--
+    console.log('gPageIdx', gPageIdx);
+
+    if (gPageIdx * PAGE_SIZE < 0) {
+        gPageIdx = 0
+    }
+}
+function getEmojys(){
+    let emojys=gEmojys
+    const startIdx = gPageIdx * PAGE_SIZE
+    emojys = emojys.slice(startIdx,startIdx + PAGE_SIZE)
+    return emojys.join('')
+}
 function addTextLine() {
     if (gMeme.selectedLineIdx === 1) return
     let newLine = {
-        txt: '',
-        size: 20,
+        txt: 'your text...',
+        size: 25,
         font: 'impact',
-        align: 'left',
+        align: 'center',
         color: 'white',
         stroke: 'black',
-        x: 250,
+        x: 200,
         y: 450,
+      
     }
     gMeme.lines.push(newLine)
     console.log('gmeme', gMeme);
@@ -45,12 +81,15 @@ function removeTextLine(slectedLine) {
     gMeme.lines[slectedLine].txt = ""
 }
 
-function updateFontFamily(font, slectedLine){
-    gMeme.lines[slectedLine].font=font
+function updateFontFamily(font, slectedLine) {
+    gMeme.lines[slectedLine].font = font
 }
 
 
 function setAlignment(alignType, slectedLine) {
+    let memeLine=getMemeLine()
+    let txtWidth= gCtx.measureText(memeLine.txt).width
+
     if (alignType === 'left') {
         gMeme.lines[slectedLine].align = alignType
         gMeme.lines[slectedLine].x = 50
@@ -60,13 +99,14 @@ function setAlignment(alignType, slectedLine) {
     } else if (alignType === 'right') {
         gMeme.lines[slectedLine].align = alignType
         gMeme.lines[slectedLine].x = 500
+        
     }
 }
 
 function updateSelectedLine(num) {
     gMeme.selectedLineIdx = num
 }
-function getLines(){
+function getLines() {
     return gMeme.lines
 }
 
@@ -76,6 +116,7 @@ function getSelectedLine() {
 function changeFontSize(diff, slectedLine) {
     let fontSize = gMeme.lines[slectedLine].size
     fontSize += diff
+    if (fontSize === 50) return
     gMeme.lines[slectedLine].size = fontSize
     console.log('fontSize', fontSize);
 

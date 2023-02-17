@@ -2,8 +2,12 @@
     font-size: 16px;
 }
 .control-box.text-input{
+    position: relative;
+    top:0;
     height: 60px;
     width: 23.3125em;
     border-radius: 0.75em;
     background-color: #ffff;
+    margin: 0 0 10px;
+    padding: 0;
 }
