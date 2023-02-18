@@ -169,7 +169,7 @@ function getUrl() {
     // console.log('img.url',img);
     // console.log('img.url',img.url);
      if(!img.url){
-        return `/img/1.jpg`
+        return `img/1.jpg`
      }else{
         return img.url
      }
@@ -186,7 +186,7 @@ function getMeme() {
 function createImgs() {
     let imgs = []
     for (let i = 1; i <= 18; i++) {
-        let img = createImg(i, `/img/${i}.jpg`)
+        let img = createImg(i, `img/${i}.jpg`)
         imgs.push(img)
     }
     return imgs
