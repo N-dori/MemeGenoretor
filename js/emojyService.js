@@ -18,10 +18,8 @@ function createEmojyModel(pos,emojy){
         const {emojyPos, size,emojy}=gEmojyModel
     
         gCtx.lineWidth = 1
-       // gCtx.strokeStyle = memeLine.stroke
-       // gCtx.fillStyle = memeLine.color
         gCtx.font = `${size}px impact`
-       // gCtx.textAlign = memeLine.align
+        gCtx.align='center'
         gCtx.textBaseline = 'middle'
     
         gCtx.fillText(emojy, emojyPos.x, emojyPos.y) // Draws (fills) a given text at the given (x, y) position.

@@ -26,8 +26,6 @@ let gMeme = {
     ]
 }
 
-// console.log('gImgs', gImgs);
-// console.log('gMeme', gMeme);
 function ChangePage(diff) {
 
     gPageIdx += diff
@@ -56,7 +54,6 @@ function prevPage() {
     }
 }
 
-
 function addTextLine() {
     let newLine = {
         txt: 'your text goes here...',
@@ -74,6 +71,7 @@ function addTextLine() {
     console.log('gmeme', gMeme);
 
 }
+
 function removeTextLine(slectedLine) {
     gMeme.lines[slectedLine].txt = ""
 }
@@ -82,20 +80,19 @@ function updateFontFamily(font, slectedLine) {
     gMeme.lines[slectedLine].font = font
 }
 
-
 function setAlignment(alignType, slectedLine) {
     let memeLine = getMemeLine()
     let txtWidth = gCtx.measureText(memeLine.txt).width
 
     if (alignType === 'left') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = 10
+        gMeme.lines[slectedLine].x = 0
     } else if (alignType === 'center') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = 250
+        gMeme.lines[slectedLine].x = gElcanvas.width/2
     } else if (alignType === 'right') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = 420
+        gMeme.lines[slectedLine].x = gElcanvas.width
 
     }
 }
@@ -111,6 +108,7 @@ function updateSelectedLine(num) {
     }
 
 }
+
 function getLines() {
     return gMeme.lines
 }
@@ -118,6 +116,7 @@ function getLines() {
 function getSelectedLine() {
     return gMeme.selectedLineIdx
 }
+
 function changeFontSize(diff, slectedLine) {
     let fontSize = gMeme.lines[slectedLine].size
     fontSize += diff
@@ -138,7 +137,6 @@ function setNewColor(color, slectedLine) {
     gMeme.lines[slectedLine].color = color
 }
 
-
 function setLineTxt(txt) {
     gMeme.lines[0].txt = txt
 
@@ -151,6 +149,7 @@ function updateText(txt) {
     gMeme.lines[selectedLine].txt = txt
 
 }
+
 function getMemeLine() {
     let selectedLine = gMeme.selectedLineIdx
     // console.log('gMeme.lines[selectedLine]',gMeme.lines[selectedLine]);
@@ -179,6 +178,7 @@ function getUrl() {
 function setMemeSelectedImgId(idx) {
     gMeme.selectedImgId = idx
 }
+
 function getMeme() {
     return gMeme
 }
@@ -200,19 +200,22 @@ function createImg(id, url) {
     }
     return img
 }
+
 function clearRects() {
     let lines = gMeme.lines
     lines.forEach(el => {
         el.rectColor = 'rgba(255,255,255,0)'
     });
 }
+
 function downloadCanvas(elLink) {
-
-
+   
     const data = gElcanvas.toDataURL() // For security reason you cannot do toDataUrl on tainted canvas
     // This protects users from having private data exposed by using images
     // to pull information from remote web sites without permission.
-    elLink.href = data
+    elLink.setAttribute('download', 'meme.png');
+  elLink.href = data
+   
     elLink.download = 'my-img.jpg'
     gMeme.lines[0].rectColor = 'orange'
 

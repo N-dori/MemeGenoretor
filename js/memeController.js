@@ -128,11 +128,11 @@ function onAlignText(alignType) {
     if (slectedLine === 0) {
         setAlignment(alignType, slectedLine)
         renderMeme()
-    } else {
+    } else if(slectedLine === 1) {
         setAlignment(alignType, slectedLine)
         renderMeme()
     }
-
+    
 }
 
 function onChangeFontSize(diff) {
@@ -224,33 +224,28 @@ function drawText(memeLine) {
 }
 
 function drawRect(memeLine) {
-    // let slectedLine = getSelectedLine()
-
-    // console.log('slectedLine', slectedLine);
-
 
     let txtWidth = gCtx.measureText(memeLine.txt).width
     let txthight = gCtx.measureText(memeLine.txt).actualBoundingBoxAscent + gCtx.measureText(memeLine.txt).actualBoundingBoxDescent
-    console.log('txthight', txthight);
 
     gCtx.strokeStyle = memeLine.rectColor
 
     if (memeLine.align === 'center') {
         gCtx.textBaseline = 'middle'
         gCtx.strokeRect(memeLine.x - (txtWidth / 2), (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
+    
     }
     if (memeLine.align === 'right') {
         gCtx.textBaseline = 'middle'
         gCtx.strokeRect(memeLine.x - txtWidth, (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
     }
+    
     if (memeLine.align === 'left') {
         gCtx.textBaseline = 'middle'
         gCtx.strokeRect(memeLine.x, (memeLine.y - (txthight / 2)) - (txthight / 2), txtWidth, txthight * 2)
     }
   
 }
-// gCtx.fillStyle = color
-// gCtx.fillRect(x, y, size, size)
 
 
 function renderImgsToGallery() {
