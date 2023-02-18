@@ -13,7 +13,7 @@
     <div onclick="toggleMenu('open')" class="main-screen"></div>
     <header class="main-header">
         <nav class="nav-bar">
-            <div class="logo-container"><img class="logo" src="/logo/LOGO.png"></div>
+            <div class="logo-container"><img class="logo" src="logo/LOGO.png"></div>
             <ul class="main-menu">
                 <li onclick="toggleGallery(1)"><a>Gallery</a></li>
                 <li><a>About</a></li>
@@ -35,24 +35,24 @@
             <div class="first-set-of-tools">
 
                 <button class="btn-control-box add-text-line" onclick="onAddTextLine()"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/add.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/add.png"></button>
                 <button class="btn-control-box switch-line" onclick="onSwitchTextLine()"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
                 <button class="btn-control-box remove-meme" onclick="onRemoveTextLine()"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/trash.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/trash.png"></button>
             </div>
             <div class="second-set-of-tools">
                 <button class="btn-control-box decrease-font" onclick="onChangeFontSize(-2)"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/decrease font - icon.png"></button>
                 <button class="btn-control-box increase-font" onclick="onChangeFontSize(2)"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/increase font - icon.png"></button>
 
                 <button class="btn-control-box  align-left" onclick="onAlignText('left')"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/align-to-left.png"></button>
                 <button class="btn-control-box  align-center" onclick="onAlignText('center')"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/center-text-alignment.png"></button>
                 <button class="btn-control-box  align-rigth" onclick="onAlignText('right')"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/align-to-right.png"></button>
             </div>
             <div class="third-set-of-tools">
                 <select onchange="onChangeFont(this.value)" class="font-fam" name="font-fam">
@@ -61,11 +61,11 @@
                     <option>Times New Roman</option>
                 </select> <!-- todo -->
                 <button class="btn-control-box color"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"> <input class="color-input"
+                        src="DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"> <input class="color-input"
                         type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)"
                         value="#ff0000"></button>
                 <button class="btn-control-box stroke"><img class="btn-img"
-                        src="/DESIGN/Meme1 - Sergei/ICONS/text stroke.png"><input class="color-input" type="color"
+                        src="DESIGN/Meme1 - Sergei/ICONS/text stroke.png"><input class="color-input" type="color"
                         id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)"
                         value="#ff0000"></button>
             </div>
@@ -73,18 +73,15 @@
             <!-- todo -->
             <div class="forth-set-of-tools">
                 <div class="control-box emojy-select">
-                    <img onclick="onChangePage(-1)" class="arrow arrow-left" src="/DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
+                    <img onclick="onChangePage(-1)" class="arrow arrow-left" src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
                     <div onclick="onAddEmojy()" class="emojy-container"></div>
-                    <img onclick="onChangePage(1)"class="arrow arrow-right" src="/DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
+                    <img onclick="onChangePage(1)"class="arrow arrow-right" src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
                 </div>
             </div>
 
           
                 <button class="btn-download"> <a class="btn-download-link" href="#" onclick="onDownload(this)" download="my-img.jpg">Download </a></button>
-                <!-- <select onchange="onDownload(this)" class="download-share">
-                    <option >Download</option>
-                    <option>Share</option>
-                  </select> -->
+              
     
             
         </section>

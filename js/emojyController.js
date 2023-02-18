@@ -1,6 +1,5 @@
 'use strict'
 function getEvPos(ev) {
-    // Gets the offset pos , in simple words where the user clicked
     let pos = {
       x: ev.offsetX,
       y: ev.offsetY,
