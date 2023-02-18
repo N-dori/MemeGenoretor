@@ -259,7 +259,7 @@ function renderImgsToGallery() {
     // <img src="/img/1.jpg"></img>
     let elImgsContainer = document.querySelector('.meme-gallery .imgs-container')
     let strHtmls = imgs.map(img => `<div class="gallery-image-container" onclick="onImgSelect(${img.id})">
-    <img  class="gallery-image" src="/img/${img.id}.jpg"></img></div>\n`)
+    <img  class="gallery-image" src="img/${img.id}.jpg"></img></div>\n`)
 
     elImgsContainer.innerHTML = strHtmls.join('')
 }
