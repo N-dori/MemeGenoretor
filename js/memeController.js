@@ -5,17 +5,41 @@ let gCtx
 let gisGalleryOpen = true
 let isFirstLoad = true
 let isMenuOpen=true
+let gEmojyStartPos
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
 
 function onInit() {
     gElcanvas = document.querySelector('#my-canvas')
     gCtx = gElcanvas.getContext('2d')
-
-    document.querySelector('.meme-editor').classList.add('display-none')
-    renderImgsToGallery()
-    renderEmojis()
-    // resizeCanvas()
-    //  renderMeme()
+ 
+   resizeCanvas()
+   document.querySelector('.meme-editor').classList.add('display-none')
+   renderImgsToGallery()
+   addListeners()
+   renderEmojis()
+     renderMeme()
 }
+//Handle the listeners
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+    //Listen for resize ev
+   
+  }
+  
+  function addMouseListeners() {
+    gElcanvas.addEventListener('mousedown', onDown)
+    gElcanvas.addEventListener('mousemove', onMove)
+    gElcanvas.addEventListener('mouseup', onUp)
+  }
+  
+  function addTouchListeners() {
+    gElcanvas.addEventListener('touchstart', onDown)
+    gElcanvas.addEventListener('touchmove', onMove)
+    gElcanvas.addEventListener('touchend', onUp)
+  }
+ 
 function toggleMenu(){
     let elscreen=document.querySelector('.main-screen')
     let elNavBar=document.querySelector('.nav-bar')
@@ -39,8 +63,10 @@ function onChangePage(diff) {
 
 function renderEmojis() {
     const elEmojysContainer = document.querySelector('.emojy-container')
-    const emojys = getEmojys()
-    elEmojysContainer.innerHTML = emojys
+    const emojy = getEmojys()
+    console.log('emojy',emojy);
+    
+    elEmojysContainer.innerHTML = emojy
 
 }
 
@@ -53,6 +79,8 @@ isFirstLoad=false
     let elEditor = document.querySelector('.meme-editor')
     let elGallery = document.querySelector('.meme-gallery')
     if (gisGalleryOpen) {
+        console.log('holalalala');
+        
         elEditor.classList.remove('display-none')
         elGallery.classList.add('display-none')
         gisGalleryOpen = false
@@ -64,7 +92,9 @@ isFirstLoad=false
 
 }
 
+
 function onAddTextLine() {
+ 
     addTextLine()
 }
 
@@ -124,14 +154,16 @@ function onchangecolor(type, color) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
         let elText = document.querySelector('.display-txt.top')
-        if (type === 'fill') elText.style.color = color + ''
-        if (type === 'stroke') elText.style.webkitTextStroke = `1px`;
-        setNewColor(color, slectedLine)
+        if (type === 'fill') setNewColor(color, slectedLine)
+        if (type === 'stroke') setNewStrokeColor(color, slectedLine)
+        renderMeme()
+        
     } else {
         let elText = document.querySelector('.display-txt.battom')
-        if (type === 'fill') elText.style.color = color + ''
-        if (type === 'stroke') elText.style.webkitTextStroke = `1px`;
-        setNewColor(color, slectedLine)
+        if (type === 'fill') setNewColor(color, slectedLine)
+        if (type === 'stroke') setNewStrokeColor(color, slectedLine)
+        renderMeme()
+        
     }
 
 }
@@ -147,6 +179,7 @@ function renderMeme() {
     let lines = getLines()
     const img = new Image()
     const src = getUrl()
+    if(!src)return
     img.src = src
    
     img.onload = () => {
@@ -155,6 +188,7 @@ function renderMeme() {
             let line = lines[i];
             drawText(line)
             if (line.txt) drawRect(line)
+            renderEmojyToCanvas()
         }
     }
 }
@@ -171,8 +205,11 @@ function onDrawText(text) {
     renderMeme()
 
 }
+
+
 function drawText(memeLine) {
-    console.log('memeLine', memeLine.align);
+
+    //console.log('memeLine', memeLine.align,emojypos);
 
     gCtx.lineWidth = 1
     gCtx.strokeStyle = memeLine.stroke

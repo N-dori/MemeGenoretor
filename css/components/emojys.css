@@ -1,5 +1,6 @@
 .emojy-container{
-    font-size: 36px;
+    font-size: 45px;
+    cursor: pointer;
 }
 .arrow{
     cursor: pointer;

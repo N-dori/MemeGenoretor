@@ -30,6 +30,7 @@
     border-radius: 12px;
     background-color: #ffff;
     margin-inline-start: 13px;
+    cursor: pointer;
 }
 .font-fam{
     width: 13.3125em;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>MemeGenoteror</title>
 </head>
 
@@ -62,18 +62,19 @@
                 </select> <!-- todo -->
                 <button class="btn-control-box color"><img class="btn-img"
                         src="/DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"> <input class="color-input"
-                        type="color" id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)"
+                        type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)"
                         value="#ff0000"></button>
                 <button class="btn-control-box stroke"><img class="btn-img"
                         src="/DESIGN/Meme1 - Sergei/ICONS/text stroke.png"><input class="color-input" type="color"
-                        id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)"
+                        id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)"
                         value="#ff0000"></button>
             </div>
 
             <!-- todo -->
             <div class="forth-set-of-tools">
                 <div class="control-box emojy-select">
-                    <img onclick="onChangePage(-1)" class="arrow arrow-left" src="/DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt=""><div class="emojy-container">dsfddfssd</div>
+                    <img onclick="onChangePage(-1)" class="arrow arrow-left" src="/DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
+                    <div onclick="onAddEmojy()" class="emojy-container"></div>
                     <img onclick="onChangePage(1)"class="arrow arrow-right" src="/DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
                 </div>
             </div>
@@ -94,8 +95,10 @@
         <div><img class="logo-fooetr" src="/logo/LOGO.png"></div>
         <small>coffe-rigths reserve 2023</small>
     </footer>
-    <script src="/js/memeService.js"></script>
-    <script src="/js/memeController.js"></script>
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
+    <script src="js/emojyService.js"></script>
+    <script src="js/emojyController.js"></script>
 </body>
 
 </html>
