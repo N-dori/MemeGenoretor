@@ -31,7 +31,7 @@
 
         <div class="control-box">
             <input class="control-box text-input" type="text" placeholder=" your a text..."
-                oninput="onDrawText(this.value)">
+                oninput="onDrawText(this.value,this)">
             <div class="first-set-of-tools">
 
                 <button class="btn-control-box add-text-line" onclick="onAddTextLine()"><img class="btn-img"
@@ -60,31 +60,35 @@
                     <option>cursive</option>
                     <option>Times New Roman</option>
                 </select> <!-- todo -->
+
                 <button class="btn-control-box color"><img class="btn-img"
-                        src="DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png"> <input class="color-input"
-                        type="color" id="favcolor" name="favcolor" onchange="onchangecolor('fill',this.value)"
-                        value="#ff0000"></button>
+                        src="DESIGN/Meme1 - Sergei/ICONS/paint-board-and-brush.png">
+                    <input class="color-input" type="color" id="favcolor" name="favcolor"
+                        oninput="onchangecolor('fill',this.value)" value="#ff0000"></button>
                 <button class="btn-control-box stroke"><img class="btn-img"
                         src="DESIGN/Meme1 - Sergei/ICONS/text stroke.png"><input class="color-input" type="color"
-                        id="favcolor" name="favcolor" onchange="onchangecolor('stroke',this.value)"
+                        id="favcolor" name="favcolor" oninput="onchangecolor('stroke',this.value)"
                         value="#ff0000"></button>
             </div>
 
             <!-- todo -->
             <div class="forth-set-of-tools">
                 <div class="control-box emojy-select">
-                    <img onclick="onChangePage(-1)" class="arrow arrow-left" src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
+                    <img onclick="onChangePage(-1)" class="arrow arrow-left"
+                        src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
                     <div onclick="onAddEmojy()" class="emojy-container"></div>
-                    <img onclick="onChangePage(1)"class="arrow arrow-right" src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
+                    <img onclick="onChangePage(1)" class="arrow arrow-right"
+                        src="DESIGN/Meme1 - Sergei/ICONS/Rectangle 9 copy.psb.png" alt="">
                 </div>
             </div>
 
-          
-                <button class="btn-download"> <a class="btn-download-link" href="#" onclick="onDownload(this)" download="my-img.jpg">Download </a></button>
-              
-    
-            
-        </section>
+
+            <button class="btn-download"> <a class="btn-download-link" href="#" onclick="onDownload(this)"
+                    download="my-img.jpg">Download </a></button>
+
+
+
+    </section>
     <section class="meme-gallery">
         <div class="meme-gallery imgs-container"></div>
     </section>

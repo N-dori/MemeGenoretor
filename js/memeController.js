@@ -96,12 +96,18 @@ isFirstLoad=false
 function onAddTextLine() {
  
     addTextLine()
+    renderMeme()
 }
 
 function onSwitchTextLine() {
     let selectedLine = getSelectedLine()
-    if (selectedLine === 0){} updateSelectedLine(1)
-    if (selectedLine === 1) updateSelectedLine(0)
+    if (selectedLine === 0){
+        updateSelectedLine(1)
+       
+    } 
+    if (selectedLine === 1){
+        updateSelectedLine(0)
+    } 
 }
 
 function onChangeFont(font) {
@@ -153,13 +159,12 @@ function onChangeFontSize(diff) {
 function onchangecolor(type, color) {
     let slectedLine = getSelectedLine()
     if (slectedLine === 0) {
-        let elText = document.querySelector('.display-txt.top')
+        
         if (type === 'fill') setNewColor(color, slectedLine)
         if (type === 'stroke') setNewStrokeColor(color, slectedLine)
         renderMeme()
         
     } else {
-        let elText = document.querySelector('.display-txt.battom')
         if (type === 'fill') setNewColor(color, slectedLine)
         if (type === 'stroke') setNewStrokeColor(color, slectedLine)
         renderMeme()
@@ -167,10 +172,10 @@ function onchangecolor(type, color) {
     }
 
 }
-function onSetLineTxt(txt) {
-    //recive text from this.value
-    setLineTxt(txt)
-}
+// function onSetLineTxt(txt) {
+//     //recive text from this.value
+//     setLineTxt(txt)
+// }
 
 
 
@@ -201,7 +206,10 @@ function onImgSelect(idx) {
 
 }
 function onDrawText(text) {
+    let selectedLine=getSelectedLine()
+    if(gMeme.lines[selectedLine].txt === 'your text goes here...')gMeme.lines[selectedLine].txt=''
     updateText(text)
+   
     renderMeme()
 
 }

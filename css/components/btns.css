@@ -12,8 +12,15 @@
 }
 
 .color-input {
-    width: 25px;
-    height: 10px;
+    width: 41px;
+    height: 35px;
+
+    position: relative;
+    top: -31px;
+    cursor: pointer;
+    opacity: 0;
+
+
 }
 
 .colors-input {
@@ -38,6 +45,6 @@
 }
 
 
-.btn-menu{
+.btn-menu {
     display: none;
 }

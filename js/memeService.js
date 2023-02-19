@@ -67,6 +67,9 @@ function addTextLine() {
         y: 380,
 
     }
+    gMeme.lines[0].rectColor = 'rgba(255,255,255,0)'
+    gMeme.selectedLineIdx=1
+    if(gMeme.lines.length===2)return 
     gMeme.lines.push(newLine)
     console.log('gmeme', gMeme);
 
@@ -89,7 +92,7 @@ function setAlignment(alignType, slectedLine) {
         gMeme.lines[slectedLine].x = 0
     } else if (alignType === 'center') {
         gMeme.lines[slectedLine].align = alignType
-        gMeme.lines[slectedLine].x = gElcanvas.width/2
+        gMeme.lines[slectedLine].x = gElcanvas.width / 2
     } else if (alignType === 'right') {
         gMeme.lines[slectedLine].align = alignType
         gMeme.lines[slectedLine].x = gElcanvas.width
@@ -97,12 +100,20 @@ function setAlignment(alignType, slectedLine) {
     }
 }
 
-function updateSelectedLine(num) {
-    gMeme.selectedLineIdx = num
-    if (num === 0) {
+function updateSelectedLine(idx) {
+    let txtInput = document.querySelector('.control-box .text-input')
+
+    gMeme.selectedLineIdx = idx
+    if (idx === 0) {
+       if (gMeme.lines[1].txt === 'your text goes here...') txtInput.value = ""
         gMeme.lines[0].rectColor = 'orange'
         gMeme.lines[1].rectColor = 'rgba(255,255,255,0)'
-    } else if (num === 1) {
+        
+        txtInput.value = gMeme.lines[0].txt
+        // if(gMeme.lines[0].txt==="")gMeme.lines[0].txt= txtInput.placeholder
+    } else if (idx === 1) {
+        if (gMeme.lines[1].txt === 'your text goes here...') txtInput.value = ""
+        txtInput.value = gMeme.lines[1].txt
         gMeme.lines[1].rectColor = 'orange'
         gMeme.lines[0].rectColor = 'rgba(255,255,255,0)'
     }
@@ -128,7 +139,7 @@ function changeFontSize(diff, slectedLine) {
 
 }
 
-function setNewStrokeColor(color, slectedLine){
+function setNewStrokeColor(color, slectedLine) {
     gMeme.lines[slectedLine].stroke = color
 
 }
@@ -162,17 +173,17 @@ function getImgs() {
 }
 
 function getUrl() {
-  
+
     let img = gImgs.find(img => gMeme.selectedImgId === img.id)
-    if(img===undefined)return
+    if (img === undefined) return
     // console.log('img.url',img);
     // console.log('img.url',img.url);
-     if(!img.url){
+    if (!img.url) {
         return `img/1.jpg`
-     }else{
+    } else {
         return img.url
-     }
-    
+    }
+
 }
 
 function setMemeSelectedImgId(idx) {
@@ -209,13 +220,13 @@ function clearRects() {
 }
 
 function downloadCanvas(elLink) {
-   
+
     const data = gElcanvas.toDataURL() // For security reason you cannot do toDataUrl on tainted canvas
     // This protects users from having private data exposed by using images
     // to pull information from remote web sites without permission.
     elLink.setAttribute('download', 'meme.png');
-  elLink.href = data
-   
+    elLink.href = data
+
     elLink.download = 'my-img.jpg'
     gMeme.lines[0].rectColor = 'orange'
 

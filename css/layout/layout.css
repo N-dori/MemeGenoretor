@@ -51,19 +51,21 @@
 .meme-gallery .imgs-container {
     display: flex;
     flex-wrap: wrap;
+    gap:10px
 }
 
-.gallery-image-container {
+/* .gallery-image-container {
 
     margin-inline-start: 15px;
 
-    /* object-fit: contain; */
-}
+
+} */
 
 .gallery-image {
     width: 200px;
     height: 200px;
     cursor: pointer;
+    border-radius: 15px;
 }
 .display-none{
     display:none
