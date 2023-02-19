@@ -5,7 +5,7 @@ let gCtx
 let gisGalleryOpen = true
 let isFirstLoad = true
 let isMenuOpen=true
-let gEmojyStartPos
+let gLineStartPos
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 
@@ -25,7 +25,6 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     //Listen for resize ev
-   
   }
   
   function addMouseListeners() {
@@ -54,9 +53,8 @@ function toggleMenu(){
     isMenuOpen=true
    } 
 }
-function onChangePage(diff) {
-    console.log('diff', diff);
 
+function onChangePage(diff) {
     ChangePage(diff)
     renderEmojis()
 }
@@ -92,22 +90,27 @@ isFirstLoad=false
 
 }
 
+function getEmojys() {
+    let emojys = gEmojys
+    const startIdx = gPageIdx * PAGE_SIZE
+    emojys = emojys.slice(startIdx, startIdx + PAGE_SIZE)
+    return emojys.join('')
+}
 
 function onAddTextLine() {
- 
+    clearRects()
     addTextLine()
     renderMeme()
 }
 
 function onSwitchTextLine() {
     let selectedLine = getSelectedLine()
-    if (selectedLine === 0){
-        updateSelectedLine(1)
-       
-    } 
-    if (selectedLine === 1){
-        updateSelectedLine(0)
-    } 
+    console.log('selectedLine controler',selectedLine);
+   
+    if (selectedLine === 0) updateSelectedLine(1)
+    if (selectedLine === 1)updateSelectedLine(2)
+    if (selectedLine === 2)updateSelectedLine(3)
+    if (selectedLine === 3)updateSelectedLine(0)
 }
 
 function onChangeFont(font) {
@@ -162,8 +165,7 @@ function onchangecolor(type, color) {
         
         if (type === 'fill') setNewColor(color, slectedLine)
         if (type === 'stroke') setNewStrokeColor(color, slectedLine)
-        renderMeme()
-        
+        renderMeme()    
     } else {
         if (type === 'fill') setNewColor(color, slectedLine)
         if (type === 'stroke') setNewStrokeColor(color, slectedLine)
@@ -172,13 +174,6 @@ function onchangecolor(type, color) {
     }
 
 }
-// function onSetLineTxt(txt) {
-//     //recive text from this.value
-//     setLineTxt(txt)
-// }
-
-
-
 
 function renderMeme() {
     let lines = getLines()
@@ -193,7 +188,7 @@ function renderMeme() {
             let line = lines[i];
             drawText(line)
             if (line.txt) drawRect(line)
-            renderEmojyToCanvas()
+           // renderEmojyToCanvas()
         }
     }
 }
@@ -202,23 +197,17 @@ function onImgSelect(idx) {
     setMemeSelectedImgId(idx)
     toggleGallery()
     renderMeme()
-
-
 }
+
 function onDrawText(text) {
     let selectedLine=getSelectedLine()
     if(gMeme.lines[selectedLine].txt === 'your text goes here...')gMeme.lines[selectedLine].txt=''
     updateText(text)
    
     renderMeme()
-
 }
 
-
 function drawText(memeLine) {
-
-    //console.log('memeLine', memeLine.align,emojypos);
-
     gCtx.lineWidth = 1
     gCtx.strokeStyle = memeLine.stroke
     gCtx.fillStyle = memeLine.color
@@ -259,7 +248,6 @@ function drawRect(memeLine) {
 function renderImgsToGallery() {
     const imgs = getImgs()
 
-    // <img src="/img/1.jpg"></img>
     let elImgsContainer = document.querySelector('.meme-gallery .imgs-container')
     let strHtmls = imgs.map(img => `<div class="gallery-image-container" onclick="onImgSelect(${img.id})">
     <img  class="gallery-image" src="img/${img.id}.jpg"></img></div>\n`)
@@ -276,8 +264,6 @@ function onDownload(elLink) {
   
 
 }
-//meme
-
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')

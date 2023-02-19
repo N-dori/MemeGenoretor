@@ -1,13 +1,23 @@
+/* components */
 @import url(./components/btns.css);
 @import url(./components/logo.css);
 @import url(./components/text-display.css);
 @import url(./components/inputs.css);
 @import url(./components/header.css);
-@import url(./layout/layout.css);
 @import url(./components/footer.css);
-@import url(./base/base.css);
 @import url(./components/tool-box.css);
 @import url(./components/emojys.css);
-@import url(./mqr/mqr.css);
 @import url(./components/main-screen.css);
+
+/* layout */
+@import url(./layout/layout.css);
+
+/* base */
+@import url(./base/base.css);
+
+/* meida qr */
+@import url(./mqr/mqr.css);
+
+/* setup */
+
 @import url(./setup/setup.css);

@@ -14,6 +14,7 @@ let gMeme = {
             txt: 'your text goes here...',
             size: 25,
             font: 'impact',
+            isDrag:false,
             align: 'center',
             color: 'white',
             stroke: 'black',
@@ -29,7 +30,6 @@ let gMeme = {
 function ChangePage(diff) {
 
     gPageIdx += diff
-    console.log('gPageIdx', gPageIdx)
     if (gPageIdx * PAGE_SIZE >= gEmojys.length ||
         gPageIdx * PAGE_SIZE < 0) {
         gPageIdx = 0
@@ -58,6 +58,7 @@ function addTextLine() {
     let newLine = {
         txt: 'your text goes here...',
         size: 25,
+        isDrag:false,
         font: 'impact',
         align: 'center',
         color: 'white',
@@ -67,12 +68,8 @@ function addTextLine() {
         y: 380,
 
     }
-    gMeme.lines[0].rectColor = 'rgba(255,255,255,0)'
-    gMeme.selectedLineIdx=1
-    if(gMeme.lines.length===2)return 
+    gMeme.selectedLineIdx+=1
     gMeme.lines.push(newLine)
-    console.log('gmeme', gMeme);
-
 }
 
 function removeTextLine(slectedLine) {
@@ -85,7 +82,7 @@ function updateFontFamily(font, slectedLine) {
 
 function setAlignment(alignType, slectedLine) {
     let memeLine = getMemeLine()
-    let txtWidth = gCtx.measureText(memeLine.txt).width
+    
 
     if (alignType === 'left') {
         gMeme.lines[slectedLine].align = alignType
@@ -98,26 +95,6 @@ function setAlignment(alignType, slectedLine) {
         gMeme.lines[slectedLine].x = gElcanvas.width
 
     }
-}
-
-function updateSelectedLine(idx) {
-    let txtInput = document.querySelector('.control-box .text-input')
-
-    gMeme.selectedLineIdx = idx
-    if (idx === 0) {
-       if (gMeme.lines[1].txt === 'your text goes here...') txtInput.value = ""
-        gMeme.lines[0].rectColor = 'orange'
-        gMeme.lines[1].rectColor = 'rgba(255,255,255,0)'
-        
-        txtInput.value = gMeme.lines[0].txt
-        // if(gMeme.lines[0].txt==="")gMeme.lines[0].txt= txtInput.placeholder
-    } else if (idx === 1) {
-        if (gMeme.lines[1].txt === 'your text goes here...') txtInput.value = ""
-        txtInput.value = gMeme.lines[1].txt
-        gMeme.lines[1].rectColor = 'orange'
-        gMeme.lines[0].rectColor = 'rgba(255,255,255,0)'
-    }
-
 }
 
 function getLines() {
