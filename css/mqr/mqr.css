@@ -167,7 +167,39 @@
     }
 
     .gallery-image {
-        width: 164px;
-        height: 163px;
+        width: 100px;
+        height: 100px;
+    }
+}
+@media(max-width:500px) {
+    .meme-editor {
+        grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        margin-inline-start: 0px;
+
+    }
+
+    .main-header .nav-bar {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        z-index: 1;
+        background-color: #ffa500e8;
+        border-inline-start: 1px solid gray;
+        box-shadow: 1px 2px 2px 8px #d3d3d391;
+        translate: 100%;
+        transition: translate, .6s;
+
+    }
+
+    .menu-open {
+        translate: -100%;
+    }
+    .display-none {
+        display: none;
     }
 }
