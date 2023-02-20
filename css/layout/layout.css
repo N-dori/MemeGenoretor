@@ -38,6 +38,10 @@
 
 }
 
+.btn-download-share{
+    display: flex;
+}
+
 .main-footer {
     grid-column: 1/-1;
     /* background-color: red; */
